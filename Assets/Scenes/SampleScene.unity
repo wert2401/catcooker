@@ -628,8 +628,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe743c7e0d1c2444a776abf69909565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTime: 2
+  ingridientPrefab: {fileID: 9134475624263402143, guid: 826170740938cfd46a2e62bdff76e814, type: 3}
   ingridients:
-  - {fileID: 9134475624263402143, guid: 826170740938cfd46a2e62bdff76e814, type: 3}
+  - {fileID: 11400000, guid: a7341857659efd74a9fde0d177109d4a, type: 2}
+  - {fileID: 11400000, guid: e28df4e328651ce4988759a273665a21, type: 2}
+  - {fileID: 11400000, guid: ec0c95836f2f64b4ab9351cbbd6d76b3, type: 2}
+  - {fileID: 11400000, guid: 393953177a902dc4cbda3c7a40a36b8e, type: 2}
 --- !u!1 &1595058719
 GameObject:
   m_ObjectHideFlags: 0

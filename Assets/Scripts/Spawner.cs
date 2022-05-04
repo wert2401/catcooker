@@ -6,7 +6,11 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]
-    private List<GameObject> ingridients;
+    private float spawnTime = 2f;
+    [SerializeField]
+    private GameObject ingridientPrefab;
+    [SerializeField]
+    private List<IngridientModel> ingridients;
 
     // Update is called once per frame
     void Start()
@@ -22,11 +26,13 @@ public class Spawner : MonoBehaviour
 
             spawnPosition.y = transform.position.y;
 
-            GameObject ingr = ingridients[Random.Range(0, ingridients.Count - 1)];
+            IngridientModel currentIngridientModel = ingridients[Random.Range(0, ingridients.Count - 1)];
 
-            Instantiate(ingr, spawnPosition, new Quaternion(), transform);
+            GameObject currentIngridientObject = Instantiate(ingridientPrefab, spawnPosition, new Quaternion(), transform);
 
-            yield return new WaitForSeconds(2f);
+            currentIngridientObject.GetComponent<IngridientObject>().SetModel(currentIngridientModel);
+
+            yield return new WaitForSeconds(spawnTime);
         }
     }
 }
