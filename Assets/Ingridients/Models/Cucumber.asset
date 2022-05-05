@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Cucumber
   PointsNeeded: 0
+  GivenPoints: 15
   IsAvailable: 1
   Sprite: {fileID: -49827021452715039, guid: 8a8df0847693a77449205337bc7ea2a5, type: 3}

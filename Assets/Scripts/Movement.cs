@@ -60,7 +60,7 @@ public class Movement : MonoBehaviour
             x = (-gyro.w * offsetFromZero * sensivity);
         }
 
-        Debug.Log(x);
+        //Debug.Log(x);
 
         x = Mathf.Clamp(x, -offsetFromZero, offsetFromZero);
 

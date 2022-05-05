@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Tomato
   PointsNeeded: 0
+  GivenPoints: 1
   IsAvailable: 1
   Sprite: {fileID: -3962807554240710951, guid: b29b094a83d12034ab4d6fb9c8da32c9, type: 3}

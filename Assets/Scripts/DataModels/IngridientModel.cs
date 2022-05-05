@@ -7,6 +7,7 @@ public class IngridientModel : ScriptableObject
 {
     public string Name;
     public int PointsNeeded;
+    public int GivenPoints;
     public bool IsAvailable;
     public Sprite Sprite;
 }

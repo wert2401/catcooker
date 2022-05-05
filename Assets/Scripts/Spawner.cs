@@ -10,15 +10,36 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private GameObject ingridientPrefab;
     [SerializeField]
-    private List<IngridientModel> ingridients;
+    private RecipeHolder recipeHolder;
 
-    // Update is called once per frame
+    private List<IngridientModel> ingridients;
+    private IEnumerator spawnCoroutine;
+
     void Start()
     {
-        StartCoroutine(Spawn());
+        spawnCoroutine = spawn();
+        //Need to fix
+        //GameState.Instance.GameStarted += onGameStarted;
+        GameState.Instance.GameStopped += onGameStopped;
+        onGameStarted();
     }
 
-    IEnumerator Spawn()
+    private void onGameStarted()
+    {
+        updateIngridients();
+        StartCoroutine(spawnCoroutine);
+    }
+    private void onGameStopped()
+    {
+        StopCoroutine(spawnCoroutine);
+    }
+
+    private void updateIngridients()
+    {
+        ingridients = GameState.Instance.GetAvailibleIngridients();
+    }
+
+    IEnumerator spawn()
     {
         while (true)
         {
@@ -26,11 +47,15 @@ public class Spawner : MonoBehaviour
 
             spawnPosition.y = transform.position.y;
 
-            IngridientModel currentIngridientModel = ingridients[Random.Range(0, ingridients.Count - 1)];
+            IngridientModel currentIngridientModel;
+            if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+                currentIngridientModel = ingridients[Random.Range(0, ingridients.Count)];
+            else
+                currentIngridientModel = recipeHolder.RemainingIngridients[Random.Range(0, recipeHolder.CountOfRemainingIngridients)];
 
             GameObject currentIngridientObject = Instantiate(ingridientPrefab, spawnPosition, new Quaternion(), transform);
 
-            currentIngridientObject.GetComponent<IngridientObject>().SetModel(currentIngridientModel);
+            currentIngridientObject.GetComponent<IngridientObject>().Model = currentIngridientModel;
 
             yield return new WaitForSeconds(spawnTime);
         }

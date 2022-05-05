@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Egg
   PointsNeeded: 0
+  GivenPoints: 5
   IsAvailable: 1
   Sprite: {fileID: -4072622106568590741, guid: e5e33200231de6643a7c326e400cab34, type: 3}

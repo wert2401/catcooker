@@ -9,20 +9,17 @@ public class Score : MonoBehaviour
     [SerializeField]
     private Text scoreText;
 
-    [SerializeField]
-    private IngridientCollector collector;
-
     private int score = 0;
 
     private void Start()
     {
         scoreText.text = score.ToString();
-        collector.IngridientCollected += OnIngridientCollected;
+        GameState.Instance.RecipeCollected += OnRecipeCollected;
     }
 
-    private void OnIngridientCollected()
+    private void OnRecipeCollected(RecipeModel recipe)
     {
-        score += 1;
+        score += recipe.GetPoints();
         scoreText.text = score.ToString();
     }
 }

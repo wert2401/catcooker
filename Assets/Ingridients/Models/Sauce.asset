@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Sauce
   PointsNeeded: 0
-  IsAvailable: 1
+  GivenPoints: 2
+  IsAvailable: 0
   Sprite: {fileID: 0}
