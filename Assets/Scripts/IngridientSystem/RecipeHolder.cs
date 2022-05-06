@@ -6,9 +6,12 @@ using UnityEngine.UI;
 
 public class RecipeHolder : MonoBehaviour
 {
-    public RecipeModel Model { get; private set; } = new RecipeModel();
+    [SerializeField]
+    private int secondsOnIngridient = 5;
 
-    private List<IngridientModel> remainingIngridients = new List<IngridientModel>();
+    [HideInInspector]
+    public RecipeModel Model { get; private set; } = new RecipeModel();
+    [HideInInspector]
     public int CountOfRemainingIngridients
     {
         get
@@ -16,8 +19,10 @@ public class RecipeHolder : MonoBehaviour
             return remainingIngridients.Count;
         }
     }
-
+    [HideInInspector]
     public List<IngridientModel> RemainingIngridients { get { return remainingIngridients; } }
+
+    private List<IngridientModel> remainingIngridients = new List<IngridientModel>();
 
     [SerializeField]
     private int maxCountOfIndridients = 5;
@@ -26,11 +31,9 @@ public class RecipeHolder : MonoBehaviour
     [SerializeField]
     private GameObject ingridientUIPrefab;
 
-    public void GenerateNewRecipe()
+    public RecipeModel GenerateNewRecipe(List<IngridientModel> ingridients)
     {
         Model.Ingridients.Clear();
-
-        List<IngridientModel> ingridients = GameState.Instance.GetAvailibleIngridients();
 
         int countOfIngridientsInRecipe = UnityEngine.Random.Range(1, maxCountOfIndridients + 1);
 
@@ -42,11 +45,12 @@ public class RecipeHolder : MonoBehaviour
             remainingIngridients.Add(ingridients[randomIndex]);
         }
 
-        Model.timeRemaining = countOfIngridientsInRecipe * 20;
+        Model.Duration = countOfIngridientsInRecipe * secondsOnIngridient;
 
         ShowRecipe();
-    }
 
+        return Model;
+    }
     public bool TryCollectIngridient(IngridientModel ingridient)
     {
         if (remainingIngridients.Contains(ingridient))

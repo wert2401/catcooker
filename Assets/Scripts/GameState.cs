@@ -25,6 +25,8 @@ public class GameState : MonoBehaviour
     public Action GameStopped { get; set; }
     public Action<IngridientModel> IngridientCollected { get; set; }
     public Action<RecipeModel> RecipeCollected { get; set; }
+    public Action<RecipeModel> RecipeGenerated { get; set; }
+    public Action RecipeTimeIsOver { get; set; }
 
     public List<IngridientModel> GetAvailibleIngridients()
     {

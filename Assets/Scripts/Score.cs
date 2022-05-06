@@ -14,12 +14,19 @@ public class Score : MonoBehaviour
     private void Start()
     {
         scoreText.text = score.ToString();
-        GameState.Instance.RecipeCollected += OnRecipeCollected;
+        GameState.Instance.RecipeCollected += onRecipeCollected;
+        GameState.Instance.RecipeTimeIsOver += onRecipeTimeIsOver;
     }
 
-    private void OnRecipeCollected(RecipeModel recipe)
+    private void onRecipeCollected(RecipeModel recipe)
     {
         score += recipe.GetPoints();
+        scoreText.text = score.ToString();
+    }
+
+    private void onRecipeTimeIsOver()
+    {
+        score -= 100;
         scoreText.text = score.ToString();
     }
 }

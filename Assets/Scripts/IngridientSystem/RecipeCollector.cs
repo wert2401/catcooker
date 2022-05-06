@@ -9,8 +9,20 @@ public class RecipeCollector : MonoBehaviour
 
     void Start()
     {
-        GameState.Instance.IngridientCollected += onIngridientCollected;
         GameState.Instance.GameStarted += onGameStarted;
+        GameState.Instance.IngridientCollected += onIngridientCollected;
+        GameState.Instance.RecipeTimeIsOver += onRecipeTimeIsOver;
+    }
+
+    private void generateNewRecipe()
+    {
+        RecipeModel recipe = recipeHolder.GenerateNewRecipe(GameState.Instance.GetAvailibleIngridients());
+        GameState.Instance.RecipeGenerated?.Invoke(recipe);
+    }
+
+    private void onGameStarted()
+    {
+        generateNewRecipe();
     }
 
     private void onIngridientCollected(IngridientModel ingridient)
@@ -20,13 +32,13 @@ public class RecipeCollector : MonoBehaviour
             if (recipeHolder.CountOfRemainingIngridients == 0)
             {
                 GameState.Instance.RecipeCollected?.Invoke(recipeHolder.Model);
-                recipeHolder.GenerateNewRecipe();
+                generateNewRecipe();
             }
         }
     }
 
-    private void onGameStarted()
+    private void onRecipeTimeIsOver()
     {
-        recipeHolder.GenerateNewRecipe();
+        generateNewRecipe();
     }
 }

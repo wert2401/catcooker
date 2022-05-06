@@ -5,7 +5,7 @@ using UnityEngine;
 public class RecipeModel
 {
     public List<IngridientModel> Ingridients { get; set; } = new List<IngridientModel>();
-    public float timeRemaining { get; set; }
+    public float Duration { get; set; }
 
     public int GetPoints()
     {
