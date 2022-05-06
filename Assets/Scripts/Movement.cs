@@ -6,8 +6,8 @@ public class Movement : MonoBehaviour
 {
     private Touch touch;
     Vector2 offset = new Vector2();
-    const float offsetFromZero = 1.3f;
-    const float sensivity = 4f;
+    const float offsetFromZero = 1.8f;
+    const float sensivity = 0.025f;
     float x = 0;
 
     void Start()
@@ -49,21 +49,8 @@ public class Movement : MonoBehaviour
 
     void GyroControll()
     {
-        Quaternion gyro = Quaternion.Normalize(Input.gyro.attitude);
-
-        if (gyro.z > 0)
-        {
-            x = (gyro.w * offsetFromZero * sensivity);
-        }
-        else
-        {
-            x = (-gyro.w * offsetFromZero * sensivity);
-        }
-
-        //Debug.Log(x);
-
+        x += -Input.gyro.rotationRate.z * sensivity;   
         x = Mathf.Clamp(x, -offsetFromZero, offsetFromZero);
-
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }
 }

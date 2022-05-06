@@ -49,9 +49,15 @@ public class Spawner : MonoBehaviour
 
             IngridientModel currentIngridientModel;
             if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+            {
                 currentIngridientModel = ingridients[Random.Range(0, ingridients.Count)];
+            }
             else
+            {
+                if (recipeHolder.CountOfRemainingIngridients == 0)
+                    yield return new WaitForSeconds(0);
                 currentIngridientModel = recipeHolder.RemainingIngridients[Random.Range(0, recipeHolder.CountOfRemainingIngridients)];
+            }
 
             GameObject currentIngridientObject = Instantiate(ingridientPrefab, spawnPosition, new Quaternion(), transform);
 
