@@ -15,7 +15,8 @@ public class Score : MonoBehaviour
     {
         scoreText.text = score.ToString();
         GameState.Instance.RecipeCollected += onRecipeCollected;
-        GameState.Instance.RecipeTimeIsOver += onRecipeTimeIsOver;
+        //probably does not need anymore
+        //GameState.Instance.RecipeTimeIsOver += onRecipeTimeIsOver;
     }
 
     private void onRecipeCollected(RecipeModel recipe)

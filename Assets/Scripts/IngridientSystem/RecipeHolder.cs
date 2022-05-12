@@ -34,6 +34,7 @@ public class RecipeHolder : MonoBehaviour
     public RecipeModel GenerateNewRecipe(List<IngridientModel> ingridients)
     {
         Model.Ingridients.Clear();
+        remainingIngridients.Clear();
 
         int countOfIngridientsInRecipe = UnityEngine.Random.Range(1, maxCountOfIndridients + 1);
 
@@ -47,7 +48,7 @@ public class RecipeHolder : MonoBehaviour
 
         Model.Duration = countOfIngridientsInRecipe * secondsOnIngridient;
 
-        ShowRecipe();
+        showRecipe();
 
         return Model;
     }
@@ -56,13 +57,13 @@ public class RecipeHolder : MonoBehaviour
         if (remainingIngridients.Contains(ingridient))
         {
             remainingIngridients.Remove(ingridient);
-            ShowRecipe();
+            showRecipe();
             return true;
         }
         else
             return false;
     }
-    private void ShowRecipe()
+    private void showRecipe()
     {
         foreach (Transform child in recipeUI.transform)
         {
