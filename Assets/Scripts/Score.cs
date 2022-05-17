@@ -27,5 +27,6 @@ public class Score : MonoBehaviour
     private void onGameStopped()
     {
         score = 0;
+        scoreText.text = score.ToString();
     }
 }

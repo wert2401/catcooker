@@ -15,24 +15,33 @@ public class Spawner : MonoBehaviour
     private Transform spawnedIngridients;
 
     private List<IngridientModel> ingridients;
-    private IEnumerator spawnCoroutine;
 
     void Start()
     {
-        spawnCoroutine = spawn();
-        //Need to fix
         GameState.Instance.GameStarted += onGameStarted;
         GameState.Instance.GameStopped += onGameStopped;
+        GameState.Instance.GamePaused += onGamePaused;
+        GameState.Instance.GameUnpaused += onGameUnpaused;
+    }
+
+    private void onGameUnpaused()
+    {
+        StartCoroutine(spawn(1));
+    }
+
+    private void onGamePaused()
+    {
+        StopAllCoroutines();
     }
 
     private void onGameStarted()
     {
         updateIngridients();
-        StartCoroutine(spawnCoroutine);
+        StartCoroutine(spawn(1));
     }
     private void onGameStopped()
     {
-        StopCoroutine(spawnCoroutine);
+        StopAllCoroutines();
         foreach (Transform child in spawnedIngridients)
         {
             Destroy(child.gameObject);
@@ -44,8 +53,10 @@ public class Spawner : MonoBehaviour
         ingridients = GameState.Instance.GetAvailibleIngridients();
     }
 
-    IEnumerator spawn()
+    IEnumerator spawn(float timeBeforeSpawn)
     {
+        yield return new WaitForSeconds(timeBeforeSpawn);
+
         while (true)
         {
             Vector2 spawnPosition = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), 0, 0));

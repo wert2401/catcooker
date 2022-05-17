@@ -33,6 +33,8 @@ public class GameState : MonoBehaviour
 
     public Action GameStarted { get; set; }
     public Action GameStopped { get; set; }
+    public Action GamePaused { get; set; }
+    public Action GameUnpaused { get; set; }
     public Action<IngridientModel> IngridientCollected { get; set; }
     public Action<RecipeModel> RecipeCollected { get; set; }
     public Action<RecipeModel> RecipeGenerated { get; set; }
@@ -65,14 +67,13 @@ public class GameState : MonoBehaviour
     {
         Condition = GameCondition.Paused;
         map.SetActive(false);
+        GamePaused?.Invoke();
     }
 
     public void UnpauseGame()
     {
-        if (Condition == GameCondition.Paused)
-        {
-            Condition = GameCondition.Playing;
-            map.SetActive(true);
-        }
+        Condition = GameCondition.Playing;
+        map.SetActive(true);
+        GameUnpaused?.Invoke();
     }
 }
