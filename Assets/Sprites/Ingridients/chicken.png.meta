@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6fb9eb92c4072d741a76cc900112b20b
+guid: 9f397af00ad9f724282622c58deabe47
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8678448789981272047
-    second: chicken_0
+      213: 5336855417275088078
+    second: Chicken_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -35,7 +35,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -49,7 +49,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 400
+  spritePixelsToUnits: 28
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: chicken_0
+      name: Chicken_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 19
-        width: 309
-        height: 309
+        x: 5
+        y: 4
+        width: 21
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,8 +144,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fe79040b13b007870800000000000000
-      internalID: 8678448789981272047
+      spriteID: eccfc44e9b1501a40800000000000000
+      internalID: 5336855417275088078
       vertices: []
       indices: 
       edges: []

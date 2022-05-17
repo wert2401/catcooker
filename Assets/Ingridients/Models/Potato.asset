@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
-  m_Name: Sauce
+  m_Name: Potato
   m_EditorClassIdentifier: 
-  Name: Sauce
+  Name: Potato
   PointsNeeded: 0
-  GivenPoints: 2
+  GivenPoints: 16
   IsAvailable: 0
-  Sprite: {fileID: 0}
+  Sprite: {fileID: -5661783315169486296, guid: f804d70350d65564f8e375f4bb6c09ca, type: 3}

@@ -6,6 +6,8 @@ public class LifeHolder : MonoBehaviour
 {
     [SerializeField]
     private GameObject lifePrefab;
+    [SerializeField]
+    private Transform lifeUI; 
 
     private int maxHealth = 3;
     private int currentHealth;
@@ -29,20 +31,20 @@ public class LifeHolder : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            GameState.Instance.GameStopped?.Invoke();
+            GameState.Instance.StopGame();
         }
     }
 
     private void showLifes()
     {
-        foreach (Transform child in transform)
+        foreach (Transform child in lifeUI)
         {
             Destroy(child.gameObject);
         }
 
         for (int i = 0; i < currentHealth; i++)
         {
-            Instantiate(lifePrefab, transform);
+            Instantiate(lifePrefab, lifeUI);
         }
     }
 }

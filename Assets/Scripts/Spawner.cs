@@ -11,6 +11,8 @@ public class Spawner : MonoBehaviour
     private GameObject ingridientPrefab;
     [SerializeField]
     private RecipeHolder recipeHolder;
+    [SerializeField]
+    private Transform spawnedIngridients;
 
     private List<IngridientModel> ingridients;
     private IEnumerator spawnCoroutine;
@@ -19,9 +21,8 @@ public class Spawner : MonoBehaviour
     {
         spawnCoroutine = spawn();
         //Need to fix
-        //GameState.Instance.GameStarted += onGameStarted;
+        GameState.Instance.GameStarted += onGameStarted;
         GameState.Instance.GameStopped += onGameStopped;
-        onGameStarted();
     }
 
     private void onGameStarted()
@@ -32,6 +33,10 @@ public class Spawner : MonoBehaviour
     private void onGameStopped()
     {
         StopCoroutine(spawnCoroutine);
+        foreach (Transform child in spawnedIngridients)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     private void updateIngridients()
@@ -45,7 +50,7 @@ public class Spawner : MonoBehaviour
         {
             Vector2 spawnPosition = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.1f, 0.9f), 0, 0));
 
-            spawnPosition.y = transform.position.y;
+            spawnPosition.y = spawnedIngridients.position.y;
 
             IngridientModel currentIngridientModel;
             if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
@@ -59,7 +64,7 @@ public class Spawner : MonoBehaviour
                 currentIngridientModel = recipeHolder.RemainingIngridients[Random.Range(0, recipeHolder.CountOfRemainingIngridients)];
             }
 
-            GameObject currentIngridientObject = Instantiate(ingridientPrefab, spawnPosition, new Quaternion(), transform);
+            GameObject currentIngridientObject = Instantiate(ingridientPrefab, spawnPosition, new Quaternion(), spawnedIngridients);
 
             currentIngridientObject.GetComponent<IngridientObject>().Model = currentIngridientModel;
 

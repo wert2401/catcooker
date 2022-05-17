@@ -16,4 +16,4 @@ MonoBehaviour:
   PointsNeeded: 0
   GivenPoints: 5
   IsAvailable: 1
-  Sprite: {fileID: -4072622106568590741, guid: e5e33200231de6643a7c326e400cab34, type: 3}
+  Sprite: {fileID: 4646649027328027380, guid: 18ee1ed986196a6409b04474d85fd415, type: 3}
