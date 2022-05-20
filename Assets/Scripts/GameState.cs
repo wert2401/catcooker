@@ -20,6 +20,8 @@ public class GameState : MonoBehaviour
         else Destroy(gameObject);
 
         Condition = GameCondition.NotStarted;
+        dataStore = new DataStore();
+        dataStore.Init(new SaveModel() { Score=0, Ingridients = ingridientModels });
     }
 
     public GameCondition Condition { get; private set; }
@@ -29,7 +31,11 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private Navigation navigation;
     [SerializeField]
+    private Score score;
+    [SerializeField]
     private List<IngridientModel> ingridientModels;
+
+    private IDataStore dataStore;
 
     public Action GameStarted { get; set; }
     public Action GameStopped { get; set; }
@@ -39,6 +45,11 @@ public class GameState : MonoBehaviour
     public Action<RecipeModel> RecipeCollected { get; set; }
     public Action<RecipeModel> RecipeGenerated { get; set; }
     public Action RecipeTimeIsOver { get; set; }
+
+    private void Start()
+    {
+        Load();
+    }
 
     public List<IngridientModel> GetAvailibleIngridients()
     {
@@ -58,9 +69,13 @@ public class GameState : MonoBehaviour
         Condition = GameCondition.NotStarted;
         map.SetActive(false);
 
-        navigation.GoTo("Menu Screen");
-
         GameStopped?.Invoke();
+
+        UpdateIngridients();
+
+        Save();
+
+        navigation.GoTo("Menu Screen");
     }
 
     public void PauseGame()
@@ -75,5 +90,33 @@ public class GameState : MonoBehaviour
         Condition = GameCondition.Playing;
         map.SetActive(true);
         GameUnpaused?.Invoke();
+    }
+
+    private void UpdateIngridients()
+    {
+        foreach (IngridientModel ingridient in ingridientModels)
+        {
+            if (ingridient.PointsNeeded <= score.MaxScore)
+                ingridient.IsAvailable = true;
+        }
+    }
+
+    private void Save()
+    {
+        SaveModel model = new SaveModel()
+        {
+            Ingridients = ingridientModels,
+            Score = score.MaxScore
+        };
+
+        dataStore.Save(model);
+    }
+
+    private void Load()
+    {
+        SaveModel model = dataStore.Load();
+
+        score.MaxScore = model.Score;
+        ingridientModels = model.Ingridients;
     }
 }

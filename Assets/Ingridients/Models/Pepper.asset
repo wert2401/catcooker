@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pepper
   m_EditorClassIdentifier: 
   Name: Pepper
-  PointsNeeded: 0
+  PointsNeeded: 15
   GivenPoints: 15
   IsAvailable: 0
   Sprite: {fileID: 2708099430083492396, guid: b3b05cd16f27c0843b1f10266e7b1d69, type: 3}

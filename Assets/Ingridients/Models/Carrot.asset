@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Carrot
   m_EditorClassIdentifier: 
   Name: Carrot
-  PointsNeeded: 0
-  GivenPoints: 10
+  PointsNeeded: 10
+  GivenPoints: 20
   IsAvailable: 0
   Sprite: {fileID: -5859083586626064994, guid: 29367b226bbe2a64dafbab41c6b3e6d1, type: 3}

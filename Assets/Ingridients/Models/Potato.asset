@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   Name: Potato
-  PointsNeeded: 0
-  GivenPoints: 16
+  PointsNeeded: 15
+  GivenPoints: 5
   IsAvailable: 0
   Sprite: {fileID: -5661783315169486296, guid: f804d70350d65564f8e375f4bb6c09ca, type: 3}
