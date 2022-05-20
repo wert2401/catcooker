@@ -71,7 +71,7 @@ public class GameState : MonoBehaviour
 
         GameStopped?.Invoke();
 
-        UpdateIngridients();
+        updateIngridients();
 
         Save();
 
@@ -92,7 +92,7 @@ public class GameState : MonoBehaviour
         GameUnpaused?.Invoke();
     }
 
-    private void UpdateIngridients()
+    private void updateIngridients()
     {
         foreach (IngridientModel ingridient in ingridientModels)
         {
@@ -109,6 +109,9 @@ public class GameState : MonoBehaviour
             Score = score.MaxScore
         };
 
+        foreach (IngridientModel ingridient in model.Ingridients)
+            Debug.Log(ingridient + ": " + ingridient.IsAvailable);
+
         dataStore.Save(model);
     }
 
@@ -118,5 +121,7 @@ public class GameState : MonoBehaviour
 
         score.MaxScore = model.Score;
         ingridientModels = model.Ingridients;
+
+        updateIngridients();
     }
 }
