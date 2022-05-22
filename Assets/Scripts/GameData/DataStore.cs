@@ -9,6 +9,7 @@ public class DataStore : IDataStore
 
     public void Init(SaveModel firstSaveModel)
     {
+
         if (File.Exists(pathToSave))
             return;
         else

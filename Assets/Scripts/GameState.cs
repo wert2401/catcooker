@@ -56,6 +56,11 @@ public class GameState : MonoBehaviour
         return ingridientModels.Where(x => x.IsAvailable == true).ToList();
     }
 
+    public List<IngridientModel> GetIngredients()
+    {
+        return ingridientModels;
+    }
+
     public void StartGame()
     {
         Condition = GameCondition.Playing;
@@ -108,9 +113,6 @@ public class GameState : MonoBehaviour
             Ingridients = ingridientModels,
             Score = score.MaxScore
         };
-
-        foreach (IngridientModel ingridient in model.Ingridients)
-            Debug.Log(ingridient + ": " + ingridient.IsAvailable);
 
         dataStore.Save(model);
     }
