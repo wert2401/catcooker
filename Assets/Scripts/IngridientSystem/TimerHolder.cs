@@ -18,7 +18,7 @@ public class TimerHolder : MonoBehaviour
 
     void Update()
     {
-        if (isThereARecipe)
+        if (isThereARecipe && GameState.Instance.Condition != GameCondition.Paused)
         {
             remainingTime -= Time.deltaTime;
             slider.value = remainingTime / recipeDuration;

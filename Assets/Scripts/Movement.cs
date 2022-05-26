@@ -7,12 +7,15 @@ public class Movement : MonoBehaviour
     private Touch touch;
     Vector2 offset = new Vector2();
     const float offsetFromZero = 1.8f;
-    const float sensivity = 0.025f;
+    const float sensivity = 0.05f;
+    private float sensivityFactor = 0.5f;
+
     float x = 0;
 
     void Start()
     {
         Input.gyro.enabled = true;
+        GameState.Instance.SettingsChanged += onSettingsChanged;
     }
 
     void Update()
@@ -49,8 +52,13 @@ public class Movement : MonoBehaviour
 
     void GyroControll()
     {
-        x += -Input.gyro.rotationRate.z * sensivity;   
+        x += -Input.gyro.rotationRate.z * sensivity * sensivityFactor;   
         x = Mathf.Clamp(x, -offsetFromZero, offsetFromZero);
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
+    }
+
+    void onSettingsChanged(SettingsModel settings)
+    {
+        sensivityFactor = settings.SensivityFactor;
     }
 }

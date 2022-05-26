@@ -10,5 +10,6 @@ public class SaveModel
 {
     public int Score;
     public List<IngridientModel> Ingridients;
+    public SettingsModel Settings;
 }
 

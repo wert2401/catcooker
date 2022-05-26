@@ -9,7 +9,6 @@ public class DataStore : IDataStore
 
     public void Init(SaveModel firstSaveModel)
     {
-
         if (File.Exists(pathToSave))
             return;
         else
@@ -26,7 +25,6 @@ public class DataStore : IDataStore
     public void Save(SaveModel saveModel)
     {
         string json = JsonUtility.ToJson(saveModel);
-
         File.WriteAllText(pathToSave, json);
     }
 

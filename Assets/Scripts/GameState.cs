@@ -21,7 +21,17 @@ public class GameState : MonoBehaviour
 
         Condition = GameCondition.NotStarted;
         dataStore = new DataStore();
-        dataStore.Init(new SaveModel() { Score=0, Ingridients = ingridientModels });
+        dataStore.Init(new SaveModel()
+        {
+            Score = 0,
+            Ingridients = ingridientModels,
+            Settings = new SettingsModel()
+            {
+                MusicVolume = 0.5f,
+                SensivityFactor = 0.5f,
+                SoundVolume = 0.5f
+            }
+        });
     }
 
     public GameCondition Condition { get; private set; }
@@ -32,6 +42,8 @@ public class GameState : MonoBehaviour
     private Navigation navigation;
     [SerializeField]
     private Score score;
+    [SerializeField]
+    private SettingsHolder settingsHolder;
     [SerializeField]
     private List<IngridientModel> ingridientModels;
 
@@ -45,10 +57,12 @@ public class GameState : MonoBehaviour
     public Action<RecipeModel> RecipeCollected { get; set; }
     public Action<RecipeModel> RecipeGenerated { get; set; }
     public Action RecipeTimeIsOver { get; set; }
+    public Action<SettingsModel> SettingsChanged { get; set; }
 
     private void Start()
     {
         Load();
+        map.SetActive(false);
     }
 
     public List<IngridientModel> GetAvailibleIngridients()
@@ -85,16 +99,22 @@ public class GameState : MonoBehaviour
 
     public void PauseGame()
     {
-        Condition = GameCondition.Paused;
-        map.SetActive(false);
-        GamePaused?.Invoke();
+        if (Condition == GameCondition.Playing)
+        {
+            Condition = GameCondition.Paused;
+            map.SetActive(false);
+            GamePaused?.Invoke();
+        }
     }
 
     public void UnpauseGame()
     {
-        Condition = GameCondition.Playing;
-        map.SetActive(true);
-        GameUnpaused?.Invoke();
+        if (Condition == GameCondition.Paused)
+        {
+            Condition = GameCondition.Playing;
+            map.SetActive(true);
+            GameUnpaused?.Invoke();
+        }
     }
 
     private void updateIngridients()
@@ -111,7 +131,8 @@ public class GameState : MonoBehaviour
         SaveModel model = new SaveModel()
         {
             Ingridients = ingridientModels,
-            Score = score.MaxScore
+            Score = score.MaxScore,
+            Settings = settingsHolder.Settings
         };
 
         dataStore.Save(model);
@@ -123,6 +144,7 @@ public class GameState : MonoBehaviour
 
         score.MaxScore = model.Score;
         ingridientModels = model.Ingridients;
+        settingsHolder.SetSettings(model.Settings);
 
         updateIngridients();
     }
