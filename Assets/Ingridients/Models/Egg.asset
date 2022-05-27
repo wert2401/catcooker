@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: 
-  Name: Egg
-  PointsNeeded: 15
-  GivenPoints: 15
+  Name: "\u042F\u0439\u0446\u043E"
+  PointsNeeded: 1050
+  GivenPoints: 75
   IsAvailable: 0
   Sprite: {fileID: 4646649027328027380, guid: 18ee1ed986196a6409b04474d85fd415, type: 3}
+  isWrong: 0

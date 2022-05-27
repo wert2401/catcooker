@@ -36,6 +36,7 @@ public class GameState : MonoBehaviour
 
     public GameCondition Condition { get; private set; }
 
+    [Header("Holders")]
     [SerializeField]
     private GameObject map;
     [SerializeField]
@@ -45,7 +46,13 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private SettingsHolder settingsHolder;
     [SerializeField]
+    private DifficultyHolder difficultyHolder;
+
+    [Header("Ingredients")]
+    [SerializeField]
     private List<IngridientModel> ingridientModels;
+    [SerializeField]
+    private List<IngridientModel> wrongIngridientModels;
 
     private IDataStore dataStore;
 
@@ -58,6 +65,12 @@ public class GameState : MonoBehaviour
     public Action<RecipeModel> RecipeGenerated { get; set; }
     public Action RecipeTimeIsOver { get; set; }
     public Action<SettingsModel> SettingsChanged { get; set; }
+    public Action NewRecord { get; set; }
+    public Action TimerEnding { get; set; }
+    public Action<IngridientModel> WrongIngredientCollected { get; set; }
+    public Action RightIngredientCollected { get; set; }
+    public Action HealthReduced { get; set; }
+    public Action<DifficultyModel> DifficultyChanged { get; set; } 
 
     private void Start()
     {
@@ -69,16 +82,24 @@ public class GameState : MonoBehaviour
     {
         return ingridientModels.Where(x => x.IsAvailable == true).ToList();
     }
-
     public List<IngridientModel> GetIngredients()
     {
         return ingridientModels;
+    }
+    public List<IngridientModel> GetWrongIngredients()
+    {
+        return wrongIngridientModels;
+    }
+    public int GetCurrentDifficultyLevel()
+    {
+        return difficultyHolder.CurrentDifficultyLevel;
     }
 
     public void StartGame()
     {
         Condition = GameCondition.Playing;
         map.SetActive(true);
+        difficultyHolder.ResetDifficulty();
 
         GameStarted?.Invoke();
     }
@@ -115,6 +136,11 @@ public class GameState : MonoBehaviour
             map.SetActive(true);
             GameUnpaused?.Invoke();
         }
+    }
+
+    public void CheckDifficultyIncreasing(int score)
+    {
+        difficultyHolder.CheckDifficultyIncreasing(score);
     }
 
     private void updateIngridients()

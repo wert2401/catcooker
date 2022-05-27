@@ -6,7 +6,7 @@ using UnityEngine;
 public class IngridientObject : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 0.01f;
+    private float speed = 0;
 
     private IngridientModel model;
     public IngridientModel Model
@@ -15,7 +15,7 @@ public class IngridientObject : MonoBehaviour
         set
         {
             model = value;
-            transform.name = model.Name;
+            transform.name = model.name;
             gameObject.GetComponent<SpriteRenderer>().sprite = model.Sprite;
         }
     }
@@ -25,5 +25,10 @@ public class IngridientObject : MonoBehaviour
         transform.position -= new Vector3(0, speed * Time.fixedDeltaTime, 0);
 
         Destroy(gameObject, 5f);
+    }
+
+    public void SetRandomSpeed(float speed)
+    {
+        this.speed = speed + Random.Range(-(speed * 0.4f), (speed * 0.4f));
     }
 }

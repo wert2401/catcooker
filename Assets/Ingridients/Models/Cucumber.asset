@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Cucumber
   m_EditorClassIdentifier: 
-  Name: Cucumber
-  PointsNeeded: 5
-  GivenPoints: 10
+  Name: "\u041E\u0433\u0443\u0440\u0435\u0446"
+  PointsNeeded: 450
+  GivenPoints: 50
   IsAvailable: 0
   Sprite: {fileID: -3513379549867885781, guid: cc93aab22d859d84c85b249cad3f78d3, type: 3}
+  isWrong: 0

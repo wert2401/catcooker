@@ -16,6 +16,7 @@ public class LifeHolder : MonoBehaviour
     {
         GameState.Instance.GameStarted += onGameStarted;
         GameState.Instance.RecipeTimeIsOver += onRecipeTimeIsOver;
+        GameState.Instance.WrongIngredientCollected += onWrongIngridientCollected;
     }
 
     private void onGameStarted()
@@ -26,8 +27,21 @@ public class LifeHolder : MonoBehaviour
 
     private void onRecipeTimeIsOver()
     {
+        reduceLifes();
+    }
+
+    private void onWrongIngridientCollected(IngridientModel ingridient)
+    {
+        if (ingridient.isWrong)
+            reduceLifes();
+    }
+
+    private void reduceLifes()
+    {
         currentHealth--;
         showLifes();
+
+        GameState.Instance.HealthReduced?.Invoke();
 
         if (currentHealth <= 0)
         {

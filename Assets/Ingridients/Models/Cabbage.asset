@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Cabbage
   m_EditorClassIdentifier: 
-  Name: Cabbage
-  PointsNeeded: 10
+  Name: "\u041A\u0430\u043F\u0443\u0441\u0442\u043E\u0447\u043A\u0430 (\u043D\u043E
+    \u043D\u0435 \u043A\u0440\u0430\u0441\u043D\u0430\u044F)"
+  PointsNeeded: 0
   GivenPoints: 10
   IsAvailable: 1
   Sprite: {fileID: 159068718711766808, guid: 75907e3bc40097c43bdd8b666b6d6378, type: 3}
+  isWrong: 0

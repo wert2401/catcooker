@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd33c78c6de8a9489cc195f5e4ada88, type: 3}
+  m_Name: EasyDifficulty
+  m_EditorClassIdentifier: 
+  ScoreToIncrease: 420
+  SpeedOfFalling: 3
+  SpawnTime: 1.5
+  SpawnChances: {fileID: 11400000, guid: cb814ddca97a85d469d042acba5189c1, type: 2}

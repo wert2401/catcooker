@@ -10,9 +10,12 @@ public class DataStore : IDataStore
     public void Init(SaveModel firstSaveModel)
     {
         if (File.Exists(pathToSave))
-            return;
-        else
-            Save(firstSaveModel);
+        {
+            if (IsSavedDataGood())
+                return;
+        }
+
+        Save(firstSaveModel);
     }
 
     public SaveModel Load()
@@ -26,6 +29,24 @@ public class DataStore : IDataStore
     {
         string json = JsonUtility.ToJson(saveModel);
         File.WriteAllText(pathToSave, json);
+    }
+
+    private bool IsSavedDataGood()
+    {
+        SaveModel sm = Load();
+        if (sm == null)
+            return false;
+
+        foreach (IngridientModel item in sm.Ingridients)
+        {
+            if (item == null)
+                return false;
+        }
+
+        if (sm.Settings == null)
+            return false;
+
+        return true;
     }
 
     private void removeSave()

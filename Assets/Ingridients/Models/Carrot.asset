@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Carrot
   m_EditorClassIdentifier: 
-  Name: Carrot
-  PointsNeeded: 10
-  GivenPoints: 20
-  IsAvailable: 0
+  Name: "\u041C\u043E\u0440\u043A\u043E\u0432\u043A\u0430"
+  PointsNeeded: 0
+  GivenPoints: 15
+  IsAvailable: 1
   Sprite: {fileID: -5859083586626064994, guid: 29367b226bbe2a64dafbab41c6b3e6d1, type: 3}
+  isWrong: 0

@@ -39,6 +39,7 @@ public class RecipeHolder : MonoBehaviour
         int countOfIngridientsInRecipe = UnityEngine.Random.Range(1, maxCountOfIndridients + 1);
 
         int randomIndex = 0;
+
         for (int i = 0; i < countOfIngridientsInRecipe; i++)
         {
             randomIndex = UnityEngine.Random.Range(0, ingridients.Count);
@@ -58,10 +59,14 @@ public class RecipeHolder : MonoBehaviour
         {
             remainingIngridients.Remove(ingridient);
             showRecipe();
+            GameState.Instance.RightIngredientCollected?.Invoke();
             return true;
         }
         else
+        {
+            GameState.Instance.WrongIngredientCollected?.Invoke(ingridient);
             return false;
+        }
     }
     private void showRecipe()
     {

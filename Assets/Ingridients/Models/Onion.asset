@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Onion
   m_EditorClassIdentifier: 
-  Name: Onion
-  PointsNeeded: 15
-  GivenPoints: 15
+  Name: "\u041B\u0443\u043A"
+  PointsNeeded: 1575
+  GivenPoints: 100
   IsAvailable: 0
   Sprite: {fileID: 5465580561085644368, guid: fee8b95c0ce6be146b90af42901b5fd6, type: 3}
+  isWrong: 0

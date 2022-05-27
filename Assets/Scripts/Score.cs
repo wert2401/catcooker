@@ -19,6 +19,7 @@ public class Score : MonoBehaviour
         scoreText.text = score.ToString();
         GameState.Instance.RecipeCollected += onRecipeCollected;
         GameState.Instance.GameStopped += onGameStopped;
+        GameState.Instance.WrongIngredientCollected += onWrongIngridientCollected;
     }
 
     public int MaxScore
@@ -38,6 +39,16 @@ public class Score : MonoBehaviour
     {
         score += recipe.GetPoints();
         scoreText.text = score.ToString();
+
+        GameState.Instance.CheckDifficultyIncreasing(score);
+    }
+
+    private void onWrongIngridientCollected(IngridientModel ingridient)
+    {
+        score -= ingridient.GivenPoints * 2;
+        if (score < 0)
+            score = 0;
+        scoreText.text = score.ToString();
     }
 
     private void onGameStopped()
@@ -45,6 +56,7 @@ public class Score : MonoBehaviour
         if (score > maxScore)
         {
             MaxScore = score;
+            GameState.Instance.NewRecord?.Invoke();
         }
 
         score = 0;

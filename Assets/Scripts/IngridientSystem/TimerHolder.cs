@@ -10,6 +10,7 @@ public class TimerHolder : MonoBehaviour
     private float recipeDuration;
     private float remainingTime;
     private bool isThereARecipe = false;
+    private bool timerSoundStarted = false;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class TimerHolder : MonoBehaviour
 
     void Update()
     {
-        if (isThereARecipe && GameState.Instance.Condition != GameCondition.Paused)
+        if (isThereARecipe && GameState.Instance.Condition == GameCondition.Playing)
         {
             remainingTime -= Time.deltaTime;
             slider.value = remainingTime / recipeDuration;
@@ -26,6 +27,11 @@ public class TimerHolder : MonoBehaviour
             {
                 isThereARecipe = false;
                 GameState.Instance.RecipeTimeIsOver?.Invoke();
+            }
+            if (remainingTime < 4 && !timerSoundStarted)
+            {
+                GameState.Instance.TimerEnding?.Invoke();
+                timerSoundStarted = true;
             }
         }
     }
@@ -35,5 +41,6 @@ public class TimerHolder : MonoBehaviour
         recipeDuration = recipe.Duration;
         remainingTime = recipe.Duration;
         isThereARecipe = true;
+        timerSoundStarted = false;
     }
 }

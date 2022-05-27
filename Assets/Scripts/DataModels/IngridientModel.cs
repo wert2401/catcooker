@@ -12,4 +12,5 @@ public class IngridientModel : ScriptableObject
     public int GivenPoints;
     public bool IsAvailable;
     public Sprite Sprite;
+    public bool isWrong;
 }

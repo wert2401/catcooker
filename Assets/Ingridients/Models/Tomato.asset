@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a05ed7aeec2ce24f98e945c4aa19fd2, type: 3}
   m_Name: Tomato
   m_EditorClassIdentifier: 
-  Name: Tomato
-  PointsNeeded: 15
-  GivenPoints: 0
+  Name: "\u041F\u043E\u043C\u0438\u0434\u043E\u0440"
+  PointsNeeded: 5400
+  GivenPoints: 200
   IsAvailable: 0
   Sprite: {fileID: -8113185096396602001, guid: f0f11a0403789a44e9e854983fb9ca3b, type: 3}
+  isWrong: 0
