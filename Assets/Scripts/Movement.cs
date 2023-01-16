@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     private Touch touch;
+    private Vector3 mousePosition;
+
     Vector2 offset = new Vector2();
     const float offsetFromZero = 1.8f;
     const float sensivity = 0.05f;
@@ -20,8 +23,18 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        //TouchControll();
-        GyroControll();
+        //if (Input.touchSupported)
+        //    TouchControll();
+        //else
+            MouseControll();
+
+        //GyroControll();
+    }
+
+    private void MouseControll()
+    {
+        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector3(worldPosition.x, transform.position.y, transform.position.z);
     }
 
     void TouchControll()
@@ -30,12 +43,10 @@ public class Movement : MonoBehaviour
         {
             touch = Input.GetTouch(0);
 
-
             if (touch.phase == TouchPhase.Began)
             {
                 offset = transform.position - Camera.main.ScreenToWorldPoint(touch.position);
             }
-
 
             if (touch.phase == TouchPhase.Moved)
             {
@@ -52,7 +63,7 @@ public class Movement : MonoBehaviour
 
     void GyroControll()
     {
-        x += -Input.gyro.rotationRate.z * sensivity * sensivityFactor;   
+        x += -Input.gyro.rotationRate.z * sensivity * sensivityFactor;
         x = Mathf.Clamp(x, -offsetFromZero, offsetFromZero);
         transform.position = new Vector3(x, transform.position.y, transform.position.z);
     }

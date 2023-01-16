@@ -20,18 +20,18 @@ public class GameState : MonoBehaviour
         else Destroy(gameObject);
 
         Condition = GameCondition.NotStarted;
-        dataStore = new DataStore();
-        dataStore.Init(new SaveModel()
-        {
-            Score = 0,
-            Ingridients = ingridientModels,
-            Settings = new SettingsModel()
-            {
-                MusicVolume = 0.5f,
-                SensivityFactor = 0.5f,
-                SoundVolume = 0.5f
-            }
-        });
+        //dataStore = new DataStore();
+        //dataStore.Init(new SaveModel()
+        //{
+        //    Score = 0,
+        //    Ingridients = ingridientModels,
+        //    Settings = new SettingsModel()
+        //    {
+        //        MusicVolume = 0.5f,
+        //        SensivityFactor = 0.5f,
+        //        SoundVolume = 0.5f
+        //    }
+        //});
     }
 
     public GameCondition Condition { get; private set; }
@@ -54,7 +54,7 @@ public class GameState : MonoBehaviour
     [SerializeField]
     private List<IngridientModel> wrongIngridientModels;
 
-    private IDataStore dataStore;
+    //private IDataStore dataStore;
 
     public Action GameStarted { get; set; }
     public Action GameStopped { get; set; }
@@ -113,7 +113,7 @@ public class GameState : MonoBehaviour
 
         updateIngridients();
 
-        Save();
+        //Save();
 
         navigation.GoTo("Menu Screen");
     }
@@ -161,16 +161,16 @@ public class GameState : MonoBehaviour
             Settings = settingsHolder.Settings
         };
 
-        dataStore.Save(model);
+        //dataStore.Save(model);
     }
 
     private void Load()
     {
-        SaveModel model = dataStore.Load();
+        //SaveModel model = dataStore.Load();
 
-        score.MaxScore = model.Score;
-        ingridientModels = model.Ingridients;
-        settingsHolder.SetSettings(model.Settings);
+        //score.MaxScore = model.Score;
+        //ingridientModels = model.Ingridients;
+        //settingsHolder.SetSettings(model.Settings);
 
         updateIngridients();
     }
